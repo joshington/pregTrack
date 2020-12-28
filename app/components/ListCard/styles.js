@@ -51,3 +51,6 @@ const styles = EStyleSheet.create({
         backgroundColor: "#ffffff",
     },
 })
+
+
+export default styles;

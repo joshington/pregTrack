@@ -6,20 +6,24 @@ import DatePicker from '../components/DatePicker/DatePicker';
 
 
 const BookNurse = () => {
-    // useEffect(() => {
-    //     renderCalendar();
-    //   })
-    // const renderCalendar = () => {
-    //     return (
-    //         <DatePicker />
-    //     )
-    // } 
+    useEffect(() => {
+        renderCalendar();
+      })
+    const renderCalendar = () => {
+        return (
+            <View>
+                {() => console.log("testing the hook")}
+                <DatePicker />
+            </View>
+        )
+    } 
     return(
         <>
             <StatusBar translucent={false} barStyle="light-content"/>
-            <Modal customIcon={
-                <Entypo name="location-pin" size={30} color="black" /> 
-            } 
+            <Modal 
+                customIcon={
+                    <Entypo name="location-pin" size={30} color="black" /> 
+                } 
             />
 
         </>

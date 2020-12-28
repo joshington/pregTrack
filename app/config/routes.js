@@ -18,6 +18,15 @@ import Orders from '../screens/Orders';
 import  ContactDoctor from '../screens/ContactDoctor';
 // eslint-disable-next-line no-unused-vars
 import ProductDetail from '../screens/ProductDetails';
+// import MyAccount from '../screens/MyAccount';
+import About from '../screens/About';
+import Help from '../screens/Help';
+import Communications from '../screens/Communications';
+import Register from '../screens/Register';
+import Terms_Conditions from '../screens/Terms_conditions';
+import TopUpAmount from '../screens/TopUpAmount';
+import TopUpFlutter from '../screens/TopUpflutter';
+
 
 const MamaKitStack = createStackNavigator(
     {
@@ -60,12 +69,83 @@ const MamaKitStack = createStackNavigator(
         }
     }
 )
+
+// const AboutStack = createStackNavigator({
+//     About:{
+//         screen:About,
+//         navigationOptions:{
+//             headerTitle:"About us",
+//         }
+//     },
+//     // Help:{
+//     //     screen:Help,
+//     //     navigationOptions:{
+//     //         headerTitle:"Help",
+//     //     }
+//     // }
+// })
+const MyAccountStack = createStackNavigator({
+    MyAccount:{
+        screen:MyAccount,
+        navigationOptions:{
+            headerTitle:"My Account"
+        }
+    },
+    About:{
+        screen:About,
+        navigationOptions:{
+            headerTitle:"About us",
+        }
+    },
+    Help:{
+        screen:Help,
+        navigationOptions:{
+            headerTitle:"Help",
+        }
+    },
+    Communications:{
+        screen:Communications,
+        navigationOptions:{
+            headerTitle:"Communications",
+        }
+    },
+   
+},{
+    headerMode:"screen"
+
+})
+
 const HomeStack = createStackNavigator({
+    // Register:{
+    //     screen:Register,
+    //     navigationOptions:{
+    //         headerTitle:"Register"
+    //     }
+    // },
     Home: {
         screen: Home,
         navigationOptions: {
             header: () => null,
         },
+    },
+    Terms_Conditions:{
+        screen:Terms_Conditions,
+        navigationOptions:{
+            headerTitle:"Terms And Conditions"
+        },
+    },
+    TopUpAmount:{
+       screen:TopUpAmount,
+       navigationOptions:{
+           headerTitle:"Top Up"
+        
+       },
+    },
+    TopUpFlutter:{
+        screen:TopUpFlutter,
+        navigationOptions:{
+            header: () => null,
+        }
     },
     ContactDoctor:{
         screen: ContactDoctor,
@@ -108,6 +188,7 @@ const HomeStack = createStackNavigator({
     
     }
 })
+
 const NavigationStack = createStackNavigator(
     {
         Home: {
@@ -134,10 +215,10 @@ const tabBarIcon = (name) => ({ tintColor }) => (
 const TabNavigator = createMaterialBottomTabNavigator(
     {
         MyAccount: {
-            screen: MyAccount,
+            screen: MyAccountStack,
             navigationOptions: {
                 tabBarIcon: tabBarIcon("md-person"),
-                activeColor: "#6495ed",
+                activeColor: "#20B2AA",
                 inactiveColor: "#000000",
                 barStyle: { backgroundColor: "#ffffff" },
             },
@@ -146,7 +227,7 @@ const TabNavigator = createMaterialBottomTabNavigator(
             screen: HomeStack,
             navigationOptions: {
                 tabBarIcon: tabBarIcon("md-home"),
-                activeColor: "#000000",
+                activeColor: "#20B2AA",
                 inactiveColor: "#000000",
                 barStyle: { backgroundColor: "#ffffff" },
             },

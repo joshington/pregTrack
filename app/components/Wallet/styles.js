@@ -5,7 +5,7 @@ export default EStyleSheet.create({
     separator: {
         marginLeft: 20,
         backgroundColor: "#000000",
-        flex: 1,
+        // flex: 1,
         height: StyleSheet.hairlineWidth,
     },
 })

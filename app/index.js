@@ -10,6 +10,13 @@ import MamaKitShop from './screens/MamaKitShop'
 import ProductDetail from './screens/ProductDetails';
 import UltraScan from './screens/UltraScan';
 import ContactDoctor from './screens/ContactDoctor';
+import Register from './screens/Register';
+import TopUpAmount from './screens/TopUpAmount';
+// import { DarkTheme } from "react-native-paper";
+import TopForAnother from './screens/TopForAnother';
+import CautionPin from './screens/CautionPin';
+// import OtpFill from './screens/OTPFill';
+import  OtpVerification from './screens/OtpVerification';
 
 
 EStyleSheet.build({
@@ -17,7 +24,10 @@ EStyleSheet.build({
     $primaryBlue:"#6495ed",
 });
 export default () => (
-    <Provider store={store}> 
-        <Navigator />
+    <Provider store={store}>
+        {/* <OtpVerification /> */}
+        {/* <Navigator /> */}
+        <Register />
+        {/* <CautionPin /> */}
     </Provider>
 )
