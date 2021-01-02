@@ -1,7 +1,7 @@
 import React from "react";
 import EStyleSheet from "react-native-extended-stylesheet";
 import { Provider} from 'react-redux';
-import configureStore from './config/configureStore';
+import store from './config/store'
 import Navigator from "./config/routes";
 import Home from './screens/Home';
 import BookNurse from './screens/BookNurse';
@@ -24,13 +24,10 @@ EStyleSheet.build({
     $primaryBlue:"#6495ed",
 });
 
-const store = configureStore()
+// const store = configureStore()
 
 export default () => (
     <Provider store={store}>
-        {/* <OtpVerification /> */}
         <Navigator />
-        {/* <Register /> */}
-        {/* <CautionPin /> */}
     </Provider>
 )

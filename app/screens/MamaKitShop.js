@@ -12,6 +12,11 @@ import {connect} from 'react-redux';
 
 
 class  MamaKitShop extends Component{
+    componentDidMount(){
+        return (
+            this.props.items
+        )
+    }
     // const [selectedId, setSelectedId] = useState(null);
     descriptionPress = (item) => {
         const { navigation } = this.props;
