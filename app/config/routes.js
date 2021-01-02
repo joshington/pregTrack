@@ -170,7 +170,7 @@ const HomeStack = createStackNavigator({
     MamaKitShop: {
         screen: MamaKitStack,
         navigationOptions: {
-            headerTitle: "Mama kits",
+            headerTitle: "Maternal Shop",
             headerTintColor:'#fff',
             headerStyle:{backgroundColor:"#20B2AA"},
             headerRight: () => (

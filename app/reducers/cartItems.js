@@ -1,6 +1,5 @@
 
-// import { ADD_TO_CART,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY,ADD_SHIPPING } from '../actions/cartItems'
-// // import items from '../data/items';
+
 
 // const initialState = {
 //     items:[
@@ -119,26 +118,28 @@
 
 // export default cartReducer;
 
+import { ADD_TO_CART,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY} from '../actions/cartItems';
 
 const initialState = {
     cartItems : [],
     wishListItems : [],
-    itemsCount : 0
+    itemsCount : 0,
+    wishCount:0,
 
 }
 
-export default (state=initialState, action)=>{
-    if(action.type=="ADD_TO_CART"){
+const cartReducer = (state=initialState, action)=>{
+    switch(action.type){
+        case ADD_TO_CART:
             let exists = -1;
             if(state.itemsCount>0){
                 for(let i=0; i<state.cartItems.length; i++){
-                    if(state.cartItems[i].id==action.item.id){
+                    if(state.cartItems[i].id ===action.item.id){
                         exists = 1;
                         return {
                             ...state,
                             cartItems: state.cartItems.map(item => item.id === action.item.id ?
-                                { ...item, quantity: item.quantity+1 } : 
-                                item
+                                { ...item, quantity: item.quantity+1 } :item
                             ) ,
                         }
                     }
@@ -151,83 +152,81 @@ export default (state=initialState, action)=>{
             else{
                 let updatedCartItems = [...state.cartItems, action.item];   
                 let count = state.itemsCount + 1;
-           return {
+            }
+            return {
                 ...state,
                 itemsCount : count,
                 cartItems : updatedCartItems ,
-           
-           } 
-        }
-       
-    }
-    else if(action.type=="DELETE_ITEM"){
-        let newCartItems = state.cartItems.filter(
-           (item)=>{
-            return item.id!=action.item
-           }
-        );
-        let count = state.itemsCount-1;
-        return {
-            ...state,
-            itemsCount : count,
-            cartItems : newCartItems ,
-           
-           } 
-        
-    }
-    else if(action.type=="DECREASE_QUANTITY"){
-        return {
-            ...state,
-            cartItems: state.cartItems.map(item => item.id === action.item ?
-                { ...item, quantity: item.quantity-1 } : 
-                item
-            ) ,
-            }
-    }
-    else if(action.type=="INCREASE_QUANTITY"){
-        return {
-            ...state,
-            cartItems: state.cartItems.map(item => item.id === action.item ?
-                { ...item, quantity: item.quantity+1 } : 
-                item
-            ) ,
-            }
-    }
-    else if(action.type=="ADD_TO_WISH_LIST"){
-       
-        for(let i = 0; i < state.wishListItems.length; i++){
-            if(state.wishListItems[i].id== action.item.id){
-               
-                return state;
-            }
-        }
-        
-        let updatedWishListItems = [...state.wishListItems, action.item];   
-       return {
-        ...state,
-        wishListItems : updatedWishListItems ,
-       
-       } 
-    }
-    else if(action.type=="DELETE_FROM_CART"){
-        let newWishListItems = state.wishListItems.filter(
-            (item)=>{
-             return item.id!=action.item.id
-            }
-         );
-        
-         return {
-             ...state,
-             wishListItems : newWishListItems ,
-            
             } 
+        case DELETE_ITEM:
+            let newCartItems = state.cartItems.filter(
+                (item) => {return item.id != action.items}
+            )
+            let count = state.itemsCount-1;
+            return {
+                ...state,
+                itemsCount:count,
+                cartItems:newCartItems,
+            }
+        case DECREASE_QUANTITY:
+            return {
+                ...state,
+                cartItems:state.cartItems.map(
+                    item => item.id === action.item 
+                    ? {...item, quantity: item.quantity-1 } 
+                    : item  
+                ),
+            }
+        case INCREASE_QUANTITY:
+            return {
+                ...state,
+                cartItems:state.cartItems.map(
+                    item => item.id === action.item 
+                    ? {...item, quantity: item.quatity+1 }
+                    : item 
+                ),
+            }
+        case ADD_TO_WISH_LIST:
+            for(let i=0; i < state.wishListItems.length; i++){
+                if(state.wishListItems[i].id === action.item.id){
+                    return {
+                        ...state,
+                        wishListItems: state.wishListItems.map(item => item.id === action.item.id ?
+                            { ...item, quantity: item.quantity+1 } :item
+                        ) ,
+                    }
+                }
+                else{
+                    let updatedWishListItems = [...state.wishListItems, action.item];   
+                    let count = state.wishCount + 1;
+                }
+            }
+            return{
+                ...state,
+                wishCount : count,
+                wishListItems :updatedWishListItems
+            }
+        
+        case DELETE_FROM_WISH_LIST:
+            let newWishListItems = state.wishListItems.filter(
+                (item)=>{
+                 return item.id!=action.item.id
+                }
+             );
+            
+             return {
+                ...state,
+                wishListItems : newWishListItems , 
+            } 
+        // else if(action.type=="ORDER_PLACED"){
+        //     return {
+        //         ...state,
+        //         itemsCount : 0,
+        //         cartItems : [],
+        //     }
+        // } 
+        default:
+            return state
     }
-    else if(action.type=="ORDER_PLACED"){
-        return {
-            ...state,
-            itemsCount : 0,
-            cartItems : [],
-        }
-    }
-    return state
+        
 }  

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
-import {StatusBar,StyleSheet,View,ScrollView,Image,Dimensions,FlatList} from 'react-native';
+import {StatusBar,StyleSheet,View,ScrollView,Image,Dimensions,FlatList,Text} from 'react-native';
 import  Container  from '../components/Container/Container';
 import Header from '../components/Header/Header';
 import Heading from '../components/Heading/Heading';
@@ -27,19 +27,19 @@ class  MamaKitShop extends Component{
 
     //now using this new code
     render(){
+        console.log(this.props.items);
         let itemList = this.props.items.map(item => {
             return(
                 <View key={item.id}>
                     <MamaCard 
-                        name={item.name}
+                        name={item.title}
                         customIcon={
                             <Image resizeMode="contain" style={{width:200,height:80,margin:15}} 
                                 source={item.img} 
                             />
-                            
                         }
                         price={item.price}
-                        onPress={this.descriptionPress(item)}
+                        // onPress={this.descriptionPress(item)}
                     />  
                 </View>
             )
@@ -66,6 +66,7 @@ class  MamaKitShop extends Component{
                         numColumns={2}
                     /> */}
                     {itemList}
+                    <Text>Mama kits here</Text>
                 </View>  
             </Container>
         )
@@ -73,7 +74,7 @@ class  MamaKitShop extends Component{
 }
 
 const mapStateToProps = (state) => {
-    const items = state.cartReducer.items
+    const items = state.products.productList
     return {
         items
     }
