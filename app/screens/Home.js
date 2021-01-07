@@ -16,28 +16,28 @@ import {connect} from 'react-redux';
 
 
 const n_items = 10;
-class Home extends Component{
-    static propTypes = {
-        navigation: PropTypes.object,
-        // addedItems:PropTypes.array,
-    };
+const  Home = ({navigation}) => {
+    // static propTypes = {
+    //     navigation: PropTypes.object,
+    //     // addedItems:PropTypes.array,
+    // };
 
-    getDoctor = () => {
-        this.props.navigation.navigate("ContactDoctor");
-    }
-    bookNurse = () => {
-        this.props.navigation.navigate("BookNurse");
-    }
-    shopNow = () => {
-        this.props.navigation.navigate("MamaKitShop");
-    }
-    ultraScan = () => {
-        this.props.navigation.navigate("UltraScan");
-    }
-    topWallet = () => {
-        this.props.navigation.navigate("Terms_Conditions");
-    }
-    render(){
+    // getDoctor = () => {
+    //     this.props.navigation.navigate("ContactDoctor");
+    // }
+    // bookNurse = () => {
+    //     this.props.navigation.navigate("BookNurse");
+    // }
+    // shopNow = () => {
+    //     this.props.navigation.navigate("MamaKitShop");
+    // }
+    // ultraScan = () => {
+    //     this.props.navigation.navigate("UltraScan");
+    // }
+    // topWallet = () => {
+    //     this.props.navigation.navigate("Terms_Conditions");
+    // }
+    // render(){
         return(
             <Container>
                 <StatusBar translucent={false} barStyle="light-content"/>
@@ -64,7 +64,7 @@ class Home extends Component{
                             </View>
                         </Bigdiv> */}
                         {/* <Wallet /> */}
-                        <View style={{borderRadius:10,marginLeft:8,marginRight:8}}>
+                        {/* <View style={{borderRadius:10,marginLeft:8,marginRight:8}}>
                             <View style={{flexDirection:"row",marginTop:20,borderRadius:10,
                                 height:40,alignItems:'center',backgroundColor:"#ffffff",justifyContent:'space-around'}}>
                                 <Text style={{fontSize:20,fontWeight:'bold'}}>Wallet</Text>
@@ -73,7 +73,7 @@ class Home extends Component{
                                 </Text>
                             </View>
                             {/* <Separator /> */}
-                            <View style={{flexDirection:"row",flex:1,justifyContent:"space-between",borderRadius:5,
+                            {/* <View style={{flexDirection:"row",flex:1,justifyContent:"space-between",borderRadius:5,
                                 backgroundColor:'#20B2AA',height:90}}>
                                 <TouchableOpacity style={{justifyContent:"center",marginLeft:8}} onPress={this.topWallet}>
                                     <View>
@@ -92,15 +92,15 @@ class Home extends Component{
                                         <MaterialIcons name="loop" size={40} color="black" style={{alignItems:"center"}} />
                                         <Text>Transactions</Text>
                                     </View>
-                                </TouchableOpacity>
+                                </TouchableOpacity> */}
                                 {/* <TouchableHighlight style={{justifyContent:"center",marginRight:8}}>
                                     <View>
                                         <MaterialIcons name="more-horiz" size={30} color="black" style={{alignItems:"center"}}  />
                                         <Text>More</Text>
                                     </View>
                                 </TouchableHighlight> */}
-                            </View>
-                        </View>
+                            {/* </View>
+                        </View> */} 
                         <Heading text="What do you Need?" />
                         <View style={{display:'flex',flexDirection:'row',flexWrap:"wrap",flex:1,margin:8}}>
                             <Card 
@@ -108,7 +108,7 @@ class Home extends Component{
                                 customIcon={
                                     <MaterialCommunityIcons name="mother-nurse" size={70} color="black" />
                                 } 
-                                onPress={this.bookNurse}
+                                onPress={() => navigation.navigate('Book Nurse')}
                             />
                             <Card 
                                 text="Talk to Doctor"
@@ -127,7 +127,7 @@ class Home extends Component{
                                         source={require("../../assets/mamakit.png")} 
                                     />
                                 }
-                                onPress={this.shopNow}
+                                onPress={() => navigation.navigate('Mamakits')}
 
                             />
                             <Card 
@@ -138,7 +138,7 @@ class Home extends Component{
                                         source={require("../../assets/ultrasound.png")} 
                                     />
                                 } 
-                                onPress={this.ultraScan}
+                                onPress={() => navigation.navigate('Utra Scan')}
                             
                             />
                             {/* <Card 
@@ -162,7 +162,6 @@ class Home extends Component{
             </Container>
         )
     }
-}
 // const mapStateToProps =(state) => {
 //     const addedItems = state.cartReducer.addedItems
 //     return{

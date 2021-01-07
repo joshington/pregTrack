@@ -10,7 +10,6 @@ export const ADD_QUANTITY = 'ADD_QUANTITY';
 export const addToCart= (id)=>({
     type: ADD_TO_CART,
     id
-
 })
 //remove item action
 export const removeItem=(id)=>({

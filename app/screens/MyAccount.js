@@ -7,16 +7,16 @@ import Separator from '../components/Wallet/Separator';
 
 
 
-class MyAccount extends Component{
-    static propTypes = {
-        navigation: PropTypes.object,
-    };
-    aboutLoad = () => this.props.navigation.navigate("About");
+const MyAccount = ()  => {
+    // static propTypes = {
+    //     navigation: PropTypes.object,
+    // };
+    // aboutLoad = () => this.props.navigation.navigate("About");
     
-    getHelp = () => this.props.navigation.navigate("Help");
+    // getHelp = () => this.props.navigation.navigate("Help");
     
-    loadComs = () => this.props.navigation.navigate("Communications");
-    render(){
+    // loadComs = () => this.props.navigation.navigate("Communications");
+    // render(){
         return(
             <>
                 <View style={{margin:15}}>
@@ -80,7 +80,6 @@ class MyAccount extends Component{
 
             </>
         )
-    }
 }
 
 export default MyAccount;

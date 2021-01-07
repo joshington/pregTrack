@@ -2,6 +2,7 @@ import React from "react";
 import EStyleSheet from "react-native-extended-stylesheet";
 import { Provider} from 'react-redux';
 import store from './config/store'
+// import configureStore from './config/configureStore';
 import Navigator from "./config/routes";
 import Home from './screens/Home';
 import BookNurse from './screens/BookNurse';
@@ -17,6 +18,7 @@ import TopForAnother from './screens/TopForAnother';
 import CautionPin from './screens/CautionPin';
 // import OtpFill from './screens/OTPFill';
 import  OtpVerification from './screens/OtpVerification';
+// import TestApi from './screens/TestApi';
 
 
 EStyleSheet.build({
@@ -29,5 +31,6 @@ EStyleSheet.build({
 export default () => (
     <Provider store={store}>
         <Navigator />
+        {/* <TestApi /> */}
     </Provider>
 )

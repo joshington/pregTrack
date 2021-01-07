@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {StatusBar,StyleSheet,View,ScrollView,Image} from 'react-native';
+import {StatusBar,StyleSheet,View,ScrollView,Image,Text} from 'react-native';
 
 const Orders = () => {
     return(

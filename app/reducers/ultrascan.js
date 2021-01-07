@@ -2,7 +2,6 @@ import { ULTRASCAN_SUCCESS,ULTRASCAN_FAIL,ULTRASCAN_ERROR} from '../actions/ultr
 
 const initialState = { 
     ultrascanOrder:false,
-    message:"",
     error:null,
 }
 
@@ -12,13 +11,6 @@ const ultrascanReducer = (state = initialState,action) => {
             return {
                 ...state,
                 ultrascanOrder:true,
-                message:action.message,
-            }
-        case ULTRASCAN_FAIL:
-            return {
-                ...state,
-                ultrascanOrder:false,
-                message:action.message,
             }
         case ULTRASCAN_ERROR:
             return {

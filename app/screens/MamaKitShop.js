@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, {useState,useEffect} from "react";
 import PropTypes from 'prop-types';
-import {StatusBar,StyleSheet,View,ScrollView,Image,Dimensions,FlatList,Text} from 'react-native';
+import {StatusBar,StyleSheet,View,ScrollView,Image,Dimensions,FlatList,Text,ActivityIndicator} from 'react-native';
 import  Container  from '../components/Container/Container';
 import Header from '../components/Header/Header';
 import Heading from '../components/Heading/Heading';
@@ -8,80 +8,80 @@ import Bigdiv from '../components/Bigdiv/Bigdiv';
 import MamaCard from '../components/ListCard/MamaCard';
 import VerticalSeparator from '../components/Wallet/VerticalSeparator';
 import {connect} from 'react-redux';
+import {getProductList, GET_PRODUCTS_LIST} from '../actions/products';
+import {useNavigation} from '@react-navigation/native';
+import {useSelector,useDispatch} from 'react-redux';
 
+const  MamaKitShop = () =>  {
+    const [isFetching, setFetching] = useState(true);
+    const [data, setData] = useState([]);
+    
 
-
-class  MamaKitShop extends Component{
-    componentDidMount(){
+    const navigation = useNavigation()
+    //ican as well use global dispatch
+    const dispatch = useDispatch()
+    const productData = useSelector(state => {
+        return state.products.productList
+    })
+    useEffect(() => {
+        setFetching(true);
+        fetch('https://hero-pregbackend.herokuapp.com/shop/')
+        .then((response) => products = response.json())
+        .then((products) => setData(products))
+        .catch((error) => console.error(error))
+        .finally(() => setFetching(false));
+    }, []);
+  
+    //   fetch('https://hero-pregbackend.herokuapp.com/shop/')
+    //     .then((response) => products = response.json())
+    //     .then((products) => setData(products))
+    //     .catch((error) => console.error(error))
+    //     .finally(() => setLoading(false));
         return (
-            this.props.items
-        )
-    }
-    // const [selectedId, setSelectedId] = useState(null);
-    descriptionPress = (item) => {
-        const { navigation } = this.props;
-        navigation.navigate('ProductDetail',{
-            itemId:item.id,
-            itemName:item.name,
-            itemImg:item.img,
-            itemPrice:item.price,
-            itemDescr:item.description,
-            itemQuantity:item.quantity,
-        });
-    };
-
-    //now using this new code
-    render(){
-        console.log(this.props.items);
-        let itemList = this.props.items.map(item => {
-            return(
-                <View key={item.id}>
-                    <MamaCard 
-                        name={item.title}
-                        customIcon={
-                            <Image resizeMode="contain" style={{width:200,height:80,margin:15}} 
-                                source={item.img} 
-                            />
-                        }
-                        price={item.price}
-                        // onPress={this.descriptionPress(item)}
-                    />  
-                </View>
-            )
-        })
-        return (
-            <Container>
+            <>
                 <StatusBar translucent={false} barStyle="light-content"/> 
-                <View style={{display:'flex',flexDirection:'row',flexWrap:"wrap",flex:1,margin:8,}}>
-                    {/* <FlatList 
-                        data={this.props.items}
-                        renderItem={({item}) => (
-                            <MamaCard 
-                                name={item.name}
-                                customIcon={
-                                    <Image resizeMode="contain" style={{width:200,height:80,margin:15}} 
-                                        source={item.img} 
+                    <View>
+                        {isFetching ?  <ActivityIndicator size="large" /> : (
+                            // <View style={{flexDirection:'row',flexWrap:"wrap",margin:8,display:"flex",flex: 1,}}>
+                                    <FlatList
+                                        data={data}
+                                        keyExtractor={({ id }, index) => id}
+                                        renderItem={({ item }) => (
+                                            <MamaCard 
+                                                name={item.title}
+                                                customIcon={
+                                                    <Image resizeMode="contain" style={{width:100,height:80,margin:15}} 
+                                                        source={{uri:item.img}} 
+                                                    />
+                                                }       
+                                                price={item.price}
+                                                onPress={() => {
+                                                    navigation.navigate("ProductDetails",{
+                                                        itemId:item.id,
+                                                        itemTitle:item.title,
+                                                        itemImg:item.img,
+                                                        itemPrice:item.price,
+                                                        itemDescription:item.description,
+                                                        itemQuantity:item.quantity
+                                                        
+                                                    })
+                                                }}
+                                            />
+                                        )}
+                                        contentContainerStyle={{flexDirection:"row",flexWrap:"wrap"}}
                                     />
-                                }       
-                                price={item.price}
-                                onPress={this.descriptionPress(item)}
-                            />
+                                // </View>
                         )}
-                        keyExtractor={(item) => item.id}
-                        numColumns={2}
-                    /> */}
-                    {itemList}
-                    <Text>Mama kits here</Text>
-                </View>  
-            </Container>
+                    </View>
+            </>
         )
-    }
 }
 
-const mapStateToProps = (state) => {
-    const items = state.products.productList
-    return {
-        items
-    }
-}
-export default connect(mapStateToProps,null)(MamaKitShop);
+// const mapStateToProps = (state) => {
+//     const items = state.products.productList || {}
+//     return {
+//         items,
+//         isFetching:state.products.isFetching,
+//     }
+// }
+export default MamaKitShop;
