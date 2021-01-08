@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet,View,Text,ScrollView,Image,TouchableOpacity} from 'react-native';
+import {StyleSheet,View,Text,ScrollView,Image,TouchableOpacity,ActivityIndicator} from 'react-native';
 import Separator_descr from  '../components/Wallet/Separator';
 import Description from '../components/Description/Description';
 import Increment from '../components/CartButton/Increment_decrement'
@@ -13,6 +13,8 @@ import { INCREASE_QUANTITY } from '../actions/products';
 
 // const productid = {JSON.stringify(navigation.getParam('itemDescr','description'))}
 const  ProductDetails = ({route, navigation}) => {
+
+    const [isLoading, setLoading] = useState(false);
     const {itemId,itemTitle,itemImg,itemPrice,itemDescription,itemQuantity} = route.params;
 
     const [quantity,setQuantity] = useState(itemQuantity);//handle increasing and decreasing quantity.
@@ -35,11 +37,20 @@ const  ProductDetails = ({route, navigation}) => {
                     {/* <Separator_descr /> */}
                 <View style={{flexDirection:"row",marginTop:20}}>
                     <Increment 
-                        quantity={itemQuantity}
-                        increment={() => setQuantity(itemQuantity+1)}
-                        decrement={() => setQuantity(itemQuantity-1)}
+                        quantity={quantity > 0 ? quantity : 1} //SO
+                        increment={() => setQuantity(quantity+1)}
+                        decrement={() => setQuantity(quantity-1)}
                     />
-                    <AddCart />
+                   <TouchableOpacity style={{backgroundColor:"#6495ed",borderRadius:25,height:50,width:200,
+                        marginLeft:5}}
+                        onPress={
+                           () => console.log('adding to cart')
+                        }    
+                    >
+                        <View style={{flexDirection:"row",justifyContent:"space-around"}}>
+                            <Text style={{color:"#ffffff",fontSize:20,textAlign:"center",marginTop:10}}>AddToCart</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
     

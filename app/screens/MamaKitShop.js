@@ -45,7 +45,7 @@ const  MamaKitShop = () =>  {
                             // <View style={{flexDirection:'row',flexWrap:"wrap",margin:8,display:"flex",flex: 1,}}>
                                     <FlatList
                                         data={data}
-                                        keyExtractor={({ id }, index) => id}
+                                        keyExtractor={({ id }, index) => id.toString()}
                                         renderItem={({ item }) => (
                                             <MamaCard 
                                                 name={item.title}

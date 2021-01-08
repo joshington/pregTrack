@@ -62,8 +62,40 @@ const MyAccountStack = () => {
 const MamaKitStack = () => {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="MamaKitshop" component={MamaKitShop} />
-            <Stack.Screen name="ProductDetails" component={ProductDetails} />
+            <Stack.Screen 
+                name="MamaKitshop" 
+                component={MamaKitShop} 
+                options={{headerRight:() => (
+                    <TouchableOpacity style={{marginRight:15}}>
+                        <View>
+                            <View style={{position:'absolute', height:30,width:35,borderRadius:15,
+                                backgroundColor:'rgba(95,300,200,0.8)',alignItems:'center',justifyContent:'center',
+                                zIndex:3000,left:10,bottom:10
+                            }}>
+                                <Text style={{fontSize:25,color:'black',fontWeight:"bold"}}>10</Text>
+                            </View>
+                            <FontAwesome name="shopping-basket" size={24} color="#000" />
+                        </View>
+                    </TouchableOpacity>
+                )}}
+            />
+            <Stack.Screen 
+                name="ProductDetails" 
+                component={ProductDetails} 
+                options={{headerRight:() => (
+                    <TouchableOpacity style={{marginRight:15}}>
+                        <View>
+                            <View style={{position:'absolute', height:30,width:35,borderRadius:15,
+                                backgroundColor:'rgba(95,300,200,0.8)',alignItems:'center',justifyContent:'center',
+                                zIndex:3000,left:10,bottom:10
+                            }}>
+                                <Text style={{fontSize:25,color:'black',fontWeight:"bold"}}>10</Text>
+                            </View>
+                            <FontAwesome name="shopping-basket" size={24} color="#000" />
+                        </View>
+                    </TouchableOpacity>
+                )}}
+            />
         </Stack.Navigator>
     )
 }

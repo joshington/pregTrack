@@ -26,4 +26,9 @@ export const subtractQuantity=(id)=>({
 export const addQuantity=(id)=>({
     type: ADD_QUANTITY,
     id
+});
+
+export const deleteItem = (id) => ({
+    type:DELETE_ITEM,
+    id
 })

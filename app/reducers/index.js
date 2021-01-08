@@ -8,5 +8,6 @@ import ultrascan from './ultrascan';
 export default combineReducers({
     ultrascan,
     products,
+    cartReducer,
 });
 
