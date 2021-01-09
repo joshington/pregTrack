@@ -1,33 +1,27 @@
 import React, {useState} from "react";
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {StatusBar,StyleSheet,View,Text,ScrollView,TextInput,TouchableOpacity} from 'react-native';
+import {StatusBar,StyleSheet,View,Text,ScrollView,TextInput,TouchableOpacity,ActivityIndicator} from 'react-native';
 import Heading from '../components/Heading/Heading';
 import ModalUltra from '../components/Modal/ModalUltra';
 import { Entypo } from '@expo/vector-icons';
 import FillIcon from '../components/FillIcon/FillIcon';
 import {ultrascanOrder,change_location,change_contact} from '../actions/ultrascan';
+import {useDispatch,useSelector} from 'react-redux';
+import {ULTRASCAN_SUCCESS} from '../actions/ultrascan';
 
 
-const mapStateToProps = (state) => {
-    const ultrascanOrder = state.ultrascan.ultrascanOrder;
 
-    // const message = state.utrascan.message;
-
-    return {
-        ultrascanOrder
-    }
-}
-
-const mapDispatchToProps = dispatch => ({
-   order:(location,contact) => {
-       dispatch(ultrascanOrder(location,contact));
-   }
-})
 const  UltraScan = () => {
 
     const [location, setlocation] = useState('E.g Entebbe');
-    const [contact, setcontact] = useState('E.g 0706626855')
+    const [contact, setcontact] = useState('E.g 0706626855');
+    const [isLoading,setLoading] = useState(false);
+    const dispatch = useDispatch();
+
+    let ultraOrder = useSelector(state => {
+        return state.ultrascan.ultrascanOrder
+    })
         return (
             <View style={{alignItems:"center"}}>
                 <StatusBar translucent={false} />
@@ -59,10 +53,19 @@ const  UltraScan = () => {
                                 if(!location.length || !contact.length){
                                     alert('Enter location and contact');
                                     return; 
+                                }else{
+                                    setLoading(true)
+                                    dispatch({type:ULTRASCAN_SUCCESS,payload:{location,contact}})
+                                    setLoading(false);
                                 }
                             }}
                         >
-                            <Text style={{...styles.textStyle, fontSize:20}}>Place Order</Text>
+                            <View style={{flexDirection:"row",justifyContent:"space-around"}}>
+                                <Text style={{...styles.textStyle, fontSize:20}}>Place Order</Text>
+                                {isLoading ? <ActivityIndicator size="large" /> :
+                                    null
+                                }
+                            </View>
                         </TouchableOpacity>
                     </View>
                     {}
@@ -131,4 +134,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(UltraScan);
+export default UltraScan;

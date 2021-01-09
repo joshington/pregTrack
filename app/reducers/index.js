@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 
 import products from './products';
-import cartReducer from './cartItems';
+import cartReducer from './cart';
 import ultrascan from './ultrascan';
 
 

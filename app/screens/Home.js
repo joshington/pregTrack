@@ -12,36 +12,17 @@ import CardContainer from '../components/ListCard/CardContainer';
 // import Wallet from '../components/Wallet/Wallet';
 import HealthButton from '../components/Buttons/HealthButton'
 import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 
-
-const n_items = 10;
 const  Home = ({navigation}) => {
-    // static propTypes = {
-    //     navigation: PropTypes.object,
-    //     // addedItems:PropTypes.array,
-    // };
-
-    // getDoctor = () => {
-    //     this.props.navigation.navigate("ContactDoctor");
-    // }
-    // bookNurse = () => {
-    //     this.props.navigation.navigate("BookNurse");
-    // }
-    // shopNow = () => {
-    //     this.props.navigation.navigate("MamaKitShop");
-    // }
-    // ultraScan = () => {
-    //     this.props.navigation.navigate("UltraScan");
-    // }
-    // topWallet = () => {
-    //     this.props.navigation.navigate("Terms_Conditions");
-    // }
-    // render(){
+    let cartItems = useSelector(state => {
+        return state.cartReducer.itemsCount
+    })
         return(
             <Container>
                 <StatusBar translucent={false} barStyle="light-content"/>
-                <Header  lengthItems={n_items} />
+                <Header  lengthItems={cartItems} />
                 <ScrollView>
                     <View style={{backgroundColor:"#B0E0E6",flex:1}}>
                         {/* <Heading text="Reproductive Health shop" />
@@ -115,7 +96,7 @@ const  Home = ({navigation}) => {
                                 customIcon={
                                     <Fontisto name="doctor" size={70} color="black" />
                                 } 
-                                onPress={this.getDoctor}
+                                onPress={() => console.log('replace with health tips')}
                             />
                             <Card 
                                 text="Mama kits"

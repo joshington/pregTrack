@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useLayoutEffect} from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet,View,Text,ScrollView,Image,TouchableOpacity,ActivityIndicator} from 'react-native';
 import Separator_descr from  '../components/Wallet/Separator';
@@ -8,10 +8,17 @@ import AddCart from '../components/CartButton/AddCart';
 import {items} from '../data/items';
 import {connect} from 'react-redux';
 import {useSelector,useDispatch} from 'react-redux';
-import { INCREASE_QUANTITY } from '../actions/products';
+
+import { Entypo,Ionicons,FontAwesome } from '@expo/vector-icons';
+import { ADD_TO_CART} from '../actions/cartItems';
 
 
 // const productid = {JSON.stringify(navigation.getParam('itemDescr','description'))}
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//        addToCart:(id) => {dispatch(addToCart(id))}
+//     }
+// }
 const  ProductDetails = ({route, navigation}) => {
 
     const [isLoading, setLoading] = useState(false);
@@ -19,6 +26,26 @@ const  ProductDetails = ({route, navigation}) => {
 
     const [quantity,setQuantity] = useState(itemQuantity);//handle increasing and decreasing quantity.
     const dispatch = useDispatch();
+
+    //now i want to make available my cart 
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            // headerRight:(
+            //     <TouchableOpacity style={{marginRight:15}}>
+            //         <View>
+            //             <View style={{position:'absolute', height:30,width:35,borderRadius:15,
+            //                 backgroundColor:'rgba(95,300,200,0.8)',alignItems:'center',justifyContent:'center',
+            //                 zIndex:3000,left:10,bottom:10
+            //             }}>
+            //                 <Text style={{fontSize:25,color:'black',fontWeight:"bold"}}>10</Text>
+            //             </View>
+            //             <FontAwesome name="shopping-basket" size={24} color="#000" />
+            //         </View>
+            //     </TouchableOpacity>
+            // )
+        });
+    }, [navigation]);
         return(
             <ScrollView>
                 <Image resizeMode="contain" style={{width:400,height:250, resizeMode:"cover"}} 
@@ -44,7 +71,16 @@ const  ProductDetails = ({route, navigation}) => {
                    <TouchableOpacity style={{backgroundColor:"#6495ed",borderRadius:25,height:50,width:200,
                         marginLeft:5}}
                         onPress={
-                           () => console.log('adding to cart')
+                            () => dispatch({type:ADD_TO_CART,
+                                payload:{
+                                    itemId,
+                                    itemTitle,
+                                    itemImg,
+                                    itemPrice,
+                                    itemDescription,
+                                    quantity,
+                                }
+                            })
                         }    
                     >
                         <View style={{flexDirection:"row",justifyContent:"space-around"}}>
@@ -63,9 +99,5 @@ const  ProductDetails = ({route, navigation}) => {
 //     }
 // }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//        addToCart:(id) => {dispatch(addToCart(id))}
-//     }
-// }
+
 export default ProductDetails;

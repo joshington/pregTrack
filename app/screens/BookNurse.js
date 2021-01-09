@@ -9,14 +9,6 @@ const BookNurse = () => {
     useEffect(() => {
         renderCalendar();
       })
-    const renderCalendar = () => {
-        return (
-            <View>
-                {() => console.log("testing the hook")}
-                <DatePicker />
-            </View>
-        )
-    } 
     return(
         <>
             <StatusBar translucent={false} barStyle="light-content"/>

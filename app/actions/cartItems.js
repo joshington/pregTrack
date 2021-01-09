@@ -7,9 +7,10 @@ export const ADD_QUANTITY = 'ADD_QUANTITY';
 
 
 //add cart action
-export const addToCart= (id)=>({
+//id,name,quantity,price
+export const addToCart= (payload)=>({
     type: ADD_TO_CART,
-    id
+    payload
 })
 //remove item action
 export const removeItem=(id)=>({

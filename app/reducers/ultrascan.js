@@ -5,7 +5,7 @@ const initialState = {
     error:null,
 }
 
-const ultrascanReducer = (state = initialState,action) => {
+const ultrascan = (state = initialState,action) => {
     switch(action.type){
         case ULTRASCAN_SUCCESS:
             return {
@@ -22,4 +22,4 @@ const ultrascanReducer = (state = initialState,action) => {
     }
 }
 
-export default ultrascanReducer;
+export default ultrascan;

@@ -1,7 +1,7 @@
 import {call,all} from 'redux-saga/effects';
-import {productSaga} from './productSaga';
+import {ultraSaga} from './ultraSaga';
 
 
 export default function* rootSaga(){
-    yield call(productSaga);
+    yield call(ultraSaga);
 }

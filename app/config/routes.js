@@ -30,6 +30,7 @@ import Register from '../screens/Register';
 import Terms_Conditions from '../screens/Terms_conditions';
 import TopUpAmount from '../screens/TopUpAmount';
 import TopUpFlutter from '../screens/TopUpflutter';
+import {useSelector} from 'react-redux';
 
 
 
@@ -60,6 +61,9 @@ const MyAccountStack = () => {
 }
 
 const MamaKitStack = () => {
+    let cartItems = useSelector(state => {
+        return state.cartReducer.itemsCount
+    })
     return (
         <Stack.Navigator>
             <Stack.Screen 
@@ -72,7 +76,9 @@ const MamaKitStack = () => {
                                 backgroundColor:'rgba(95,300,200,0.8)',alignItems:'center',justifyContent:'center',
                                 zIndex:3000,left:10,bottom:10
                             }}>
-                                <Text style={{fontSize:25,color:'black',fontWeight:"bold"}}>10</Text>
+                                <Text style={{fontSize:25,color:'black',fontWeight:"bold"}}>
+                                    {cartItems}
+                                </Text>
                             </View>
                             <FontAwesome name="shopping-basket" size={24} color="#000" />
                         </View>
@@ -89,7 +95,9 @@ const MamaKitStack = () => {
                                 backgroundColor:'rgba(95,300,200,0.8)',alignItems:'center',justifyContent:'center',
                                 zIndex:3000,left:10,bottom:10
                             }}>
-                                <Text style={{fontSize:25,color:'black',fontWeight:"bold"}}>10</Text>
+                                <Text style={{fontSize:25,color:'black',fontWeight:"bold"}}>
+                                    {cartItems}
+                                </Text>
                             </View>
                             <FontAwesome name="shopping-basket" size={24} color="#000" />
                         </View>
@@ -112,7 +120,7 @@ function HomeScreenStack(){
 
 const Navigator = () => {
     return (
-        <NavigationContainer>
+        <NavigationContainer >
             <Stack.Navigator headerMode="none">
                 <Stack.Screen name="rootHome" component={RootHome} />
                 <Stack.Screen  name="Home" component={HomeScreenStack} />
