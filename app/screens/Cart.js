@@ -16,9 +16,7 @@ class ShoppingCartScreen extends Component {
       <CloseBtn left size={25} onPress={() => navigation.goBack(null)} />
     ),
   });
-
   state = {};
-
   renderItem = ({ item }) => <CartItem product={item} />;
 
   keyExtractor = item => String(item.id);

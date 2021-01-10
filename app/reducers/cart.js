@@ -3,6 +3,7 @@ import { ADD_TO_CART,DELETE_ITEM,SUB_QUANTITY,ADD_QUANTITY} from '../actions/car
 const initialState = {
     itemsCount:0,
     Cart:[],
+    toalAmount:0
 }
 
 function cartReducer(state=initialState,action){
@@ -19,7 +20,8 @@ function cartReducer(state=initialState,action){
                     quantity:action.payload.quantity,
                     name:action.payload.name,
                     image:action.payload.image,
-                    price:action.payload.price
+                    price:action.payload.price,
+                    amount:price*quantity,
                 }
                 state.Cart.push(cart);
             }else{
@@ -37,13 +39,17 @@ function cartReducer(state=initialState,action){
                         name:action.payload.name,
                         image:action.payload.image,
                         price:action.payload.price,
+                        amount:price*quantity,
                     }
                     state.Cart.push(_cart)
                 }
             }
             return {
                 ...state,
-                itemsCount:state.itemsCount+1
+                itemsCount:state.itemsCount+1,
+                totalAmount:state.Cart.map(item  => {
+                    state.totalAmount+item.amount
+                })
             }
         default:
             return state

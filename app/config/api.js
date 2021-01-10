@@ -22,8 +22,8 @@ function* makeUltraOrderFromApi(payload){
         }),
     });
     // console.log(`response = ${JSON.stringify(response)}`);
-    
-    return yield (response.status === true);
+    // const message = yield()
+    return yield (response.status === 201);
 }
 export const Api = {
     makeUltraOrderFromApi,

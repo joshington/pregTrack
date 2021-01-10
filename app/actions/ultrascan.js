@@ -14,29 +14,29 @@ export const change_contact = (contact) => ({
     type:CHANGE_ULTRA_CONTACT,
     contact
 })
-const getCircularReplacer = () => {
-    const seen = new WeakSet();
-    return (key, value) => {
-        if(typeof value === "object" && value !== null){
-            if(seen.has(value)){
-                return;
-            }
-            seen.add(value);
-        }
-        return value;
-    }
-}
+// const getCircularReplacer = () => {
+//     const seen = new WeakSet();
+//     return (key, value) => {
+//         if(typeof value === "object" && value !== null){
+//             if(seen.has(value)){
+//                 return;
+//             }
+//             seen.add(value);
+//         }
+//         return value;
+//     }
+// }
 
-getError = (error,actionType) => {
-    return {
-        type:actionType,
-        error:error
-    }
-}
+// getError = (error,actionType) => {
+//     return {
+//         type:actionType,
+//         error:error
+//     }
+// }
 
-export const ultraScanOrder = (Order) => {
+export const ultraScanOrder = (payload) => {
     type:ULTRASCAN_SUCCESS,
-    Order
+    payload
 }
 // export  const ultrascanOrder = (location,contact) => {
 //     return async dispatch => {

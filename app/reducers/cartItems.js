@@ -1,32 +1,55 @@
 import { ADD_TO_CART,DELETE_ITEM,SUB_QUANTITY,ADD_QUANTITY} from '../actions/cartItems';
 
 const initialState = {
-    cartItems : [],
+    // cartItems : [],
+    cartTotalAmount:0,
     wishListItems : [],
     itemsCount : 0,
     wishCount:0,
+    Cart:[],
 
 }
 
+const cartItem= () => {
+
+}
 const cartReducer = (state=initialState, action)=>{
     switch(action.type){
         case ADD_TO_CART:
+            let cart = {
+                id:action.payload.id,
+                quantity:action.payload.quantity,
+                name:action.payload.name,
+                image:action.payload.image,
+                price:action.payload.price
+            }
             let exists = false;
             if(state.itemsCount>0){
-                for(let i=0; i<state.cartItems.length; i++){
-                    if(state.cartItems[i] ===action.id){
+                // for(let i=0; i<state.cartItems.length; i++){
+                //     if(state.cartItems[i] ===action.id){
+                //         exists = true;
+                //         return {
+                //             ...state,
+                //             cartItems: state.cartItems.map(item  => action.id ? 
+                //                 {...item,quantity:item.quantity+1} : item    
+                //             )
+                //             // cartItems: state.cartItems.map(item => item.id === action.item.id ?
+                //             //     { ...item, quantity: item.quantity+1 } :item
+                //             // ) ,
+                //         }
+                //     }
+                // }
+                state.Cart.map((item,key) => {
+                    if(item.id === action.payload.id){
+                        state.Cart[key].quantity++;
                         exists = true;
                         return {
-                            ...state,
-                            cartItems: state.cartItems.map(item  => action.id ? 
-                                {...item,quantity:item.quantity+1} : item    
-                            )
-                            // cartItems: state.cartItems.map(item => item.id === action.item.id ?
-                            //     { ...item, quantity: item.quantity+1 } :item
-                            // ) ,
+                            ...state 
+                            Cart:state
                         }
+                        // check = true;
                     }
-                }
+                })
             }
             else{
                 let updatedCartItems = [...state.cartItems, action.item];   

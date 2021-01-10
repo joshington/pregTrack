@@ -23,7 +23,7 @@ const  ProductDetails = ({route, navigation}) => {
 
     const [isLoading, setLoading] = useState(false);
     const {itemId,itemTitle,itemImg,itemPrice,itemDescription,itemQuantity} = route.params;
-
+    const [alert, setBanner] = useState(false)
     const [quantity,setQuantity] = useState(itemQuantity);//handle increasing and decreasing quantity.
     const dispatch = useDispatch();
 
@@ -81,6 +81,7 @@ const  ProductDetails = ({route, navigation}) => {
                                     quantity,
                                 }
                             })
+
                         }    
                     >
                         <View style={{flexDirection:"row",justifyContent:"space-around"}}>

@@ -24,19 +24,20 @@ const  MamaKitShop = () =>  {
         return state.products.productList
     })
     useEffect(() => {
+        let mounted = true;
         setFetching(true);
         fetch('https://hero-pregbackend.herokuapp.com/shop/')
         .then((response) => products = response.json())
-        .then((products) => setData(products))
+        .then((products) => {
+            if(mounted){
+                setData(products)
+            }
+        })
         .catch((error) => console.error(error))
         .finally(() => setFetching(false));
+        return () => mounted = false;
     }, []);
-  
-    //   fetch('https://hero-pregbackend.herokuapp.com/shop/')
-    //     .then((response) => products = response.json())
-    //     .then((products) => setData(products))
-    //     .catch((error) => console.error(error))
-    //     .finally(() => setLoading(false));
+
         return (
             <>
                 <StatusBar translucent={false} barStyle="light-content"/> 
@@ -59,7 +60,7 @@ const  MamaKitShop = () =>  {
                                                     navigation.navigate("ProductDetails",{
                                                         itemId:item.id,
                                                         itemTitle:item.title,
-                                                        itemImg:item.img,
+                                                        itemImg:item.img.url,
                                                         itemPrice:item.price,
                                                         itemDescription:item.description,
                                                         itemQuantity:item.quantity

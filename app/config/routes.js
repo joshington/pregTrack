@@ -31,6 +31,7 @@ import Terms_Conditions from '../screens/Terms_conditions';
 import TopUpAmount from '../screens/TopUpAmount';
 import TopUpFlutter from '../screens/TopUpflutter';
 import {useSelector} from 'react-redux';
+import CartScreen from '../screens/CartScreen';
 
 
 
@@ -60,7 +61,14 @@ const MyAccountStack = () => {
     )
 }
 
-const MamaKitStack = () => {
+// const CartStack = () => {
+//     return (
+//         <Stack.Navigator>
+//             <Stack.Screen name="CartScreen" component={CartScreen} />
+//         </Stack.Navigator>
+//     )
+// }
+const MamaKitStack = ({navigation}) => {
     let cartItems = useSelector(state => {
         return state.cartReducer.itemsCount
     })
@@ -70,7 +78,9 @@ const MamaKitStack = () => {
                 name="MamaKitshop" 
                 component={MamaKitShop} 
                 options={{headerRight:() => (
-                    <TouchableOpacity style={{marginRight:15}}>
+                    <TouchableOpacity style={{marginRight:15}}
+                        onPress={navigation.navigate('CartScreen')}
+                    >
                         <View>
                             <View style={{position:'absolute', height:30,width:35,borderRadius:15,
                                 backgroundColor:'rgba(95,300,200,0.8)',alignItems:'center',justifyContent:'center',
@@ -89,7 +99,9 @@ const MamaKitStack = () => {
                 name="ProductDetails" 
                 component={ProductDetails} 
                 options={{headerRight:() => (
-                    <TouchableOpacity style={{marginRight:15}}>
+                    <TouchableOpacity style={{marginRight:15}}
+                        onPress={navigation.navigate('CartScreen')}
+                    >
                         <View>
                             <View style={{position:'absolute', height:30,width:35,borderRadius:15,
                                 backgroundColor:'rgba(95,300,200,0.8)',alignItems:'center',justifyContent:'center',
@@ -125,6 +137,7 @@ const Navigator = () => {
                 <Stack.Screen name="rootHome" component={RootHome} />
                 <Stack.Screen  name="Home" component={HomeScreenStack} />
                 <Stack.Screen  name="Mamakits" component={MamaKitStack} />
+                <Stack.Screen  name="CartScreen" component={CartScreen} />
                 <Stack.Screen  name="My Account" component={MyAccountStack} />
             </Stack.Navigator>
         </NavigationContainer>
