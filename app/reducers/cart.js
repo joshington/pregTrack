@@ -3,7 +3,7 @@ import { ADD_TO_CART,DELETE_ITEM,SUB_QUANTITY,ADD_QUANTITY} from '../actions/car
 const initialState = {
     itemsCount:0,
     Cart:[],
-    toalAmount:0
+    totalAmount:0
 }
 
 function cartReducer(state=initialState,action){
@@ -16,12 +16,19 @@ function cartReducer(state=initialState,action){
                 //if the same increase quantity++,if purchased product is different from product in
                 //Carts add the 
                 let cart = {
-                    id:action.payload.id,
+                    id:action.payload.itemId,
                     quantity:action.payload.quantity,
-                    name:action.payload.name,
-                    image:action.payload.image,
-                    price:action.payload.price,
-                    amount:price*quantity,
+                    name:action.payload.itemTitle,
+                    image:action.payload.itemImg,
+                    price:action.payload.itemPrice,
+                    amount:action.payload.itemPrice*action.payload.quantity,
+
+                   
+                    // itemTitle,
+                    // itemImg,
+                    // itemPrice,
+                    // itemDescription,
+                    // quantity,
                 }
                 state.Cart.push(cart);
             }else{
@@ -34,12 +41,12 @@ function cartReducer(state=initialState,action){
                 })
                 if(!exists){
                     let _cart = {
-                        id:action.payload.id,
+                        id:action.payload.itemId,
                         quantity:action.payload.quantity,
-                        name:action.payload.name,
-                        image:action.payload.image,
-                        price:action.payload.price,
-                        amount:price*quantity,
+                        name:action.payload.itemTitle,
+                        image:action.payload.itemImg,
+                        price:action.payload.itemPrice,
+                        amount:action.payload.itemPrice*action.payload.quantity,
                     }
                     state.Cart.push(_cart)
                 }
@@ -51,6 +58,36 @@ function cartReducer(state=initialState,action){
                     state.totalAmount+item.amount
                 })
             }
+
+        case ADD_QUANTITY:
+            return {
+                ...state,
+                Cart:state.Cart.map((item,key) => {
+                    if(item.id === action.id){
+                        state.Cart[key].quantity++;
+                    }
+                })
+            }
+        case SUB_QUANTITY:
+            return {
+                ...state,
+                Cart:state.Cart.map((item,key) => {
+                    if(item.id === action.id){
+                        state.Cart[key].quantity--;
+                    }
+                })
+            }
+        case DELETE_ITEM:
+            let newCartItems = state.Cart.filter(
+                (item) => {return item.id !== action.id}
+            )
+            let count = state.itemsCount-1;
+            return {
+                ...state,
+                itemsCount:count,
+                Cart:newCartItems,
+            }
+
         default:
             return state
     }

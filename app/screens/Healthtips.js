@@ -1,37 +1,53 @@
-//  />
-// <View style={{height:150,marginTop:5}}>
-//    <Text style={{fontSize:18}}>Health Tips</Text>
-//     <View  style={{flexDirection:"row",width:'100%'}}>
-//         <ScrollView 
-//             horizontal={true}
-//             showsHorizontalScrollIndicator={false}
-//         >
-//             <TouchableOpacity>
-//                 <View style={{backgroundColor:"#B0E0E6",height:160}}>
-//                     <Image resizeMode="contain" source={require("../../assets/nutrition.png")} />
-//                     <Text style={{marginLeft:15,fontSize:20}}>Marital Nutrition</Text>
-//                     <Text style={{marginLeft:15,fontSize:15,color:"#0000FF"}}>Posted: 3 days ago</Text>
-//                     {/* <View style={{width:1,height:160,backgroundColor:"#000"}} /> */}
-//                 </View>
-//             </TouchableOpacity>
-//             <View style={{width:1,height:160,backgroundColor:"#000",marginHorizontal:5}} />
-//             <TouchableOpacity>
-//                 <View style={{backgroundColor:"#B0E0E6",height:160}}>
-//                     <Image resizeMode="contain" source={require("../../assets/train.png")} />
-//                     <Text style={{marginLeft:15,fontSize:20}}>Physical Exercise</Text>
-//                     <Text style={{marginLeft:15,fontSize:15,color:"#0000FF"}}>Posted: today</Text>
-//                     {/* <View style={{width:1,height:160,backgroundColor:"#000"}} /> */}
-//                 </View>
-//             </TouchableOpacity>
-//             <View style={{width:1,height:160,backgroundColor:"#000",marginHorizontal:5}} />
-//             {/* <TouchableOpacity>
-//                 <View style={{backgroundColor:"#B0E0E6",height:160}}>
-//                     <Image resizeMode="contain" source={require("../../assets/sleep.png")} />
-//                     <Text style={{marginLeft:15,fontSize:20}}>Rest</Text>
-//                     <Text style={{marginLeft:15,fontSize:15,color:"#0000FF"}}>Posted: today</Text>
-//                     {/* <View style={{width:1,height:160,backgroundColor:"#000"}} /> */}
-//                 </View>
-//             </TouchableOpacity> */}
-//         </ScrollView>
-//     </View>
-// </View>
+import React, {useState,useEffect} from "react";
+import PropTypes from 'prop-types';
+import {StatusBar,StyleSheet,View,ScrollView,Image,Dimensions,FlatList,Text,ActivityIndicator} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {useSelector,useDispatch} from 'react-redux';
+
+const Tip = ({title,img,description,posted}) => {
+    return (
+        <View>
+            <Text>{title}</Text>
+            <Image resizeMode="contain" style={{width:100,height:80,margin:15}} source={{uri:img}} />
+            <Text>{description}</Text>
+            <Text style={{fontSize:10}}>Posted: {posted}</Text>
+        </View>
+    )
+}
+
+
+const  Healthtips = ({navigation}) =>  {
+    const [isFetching, setFetching] = useState(true);
+    const [healthData, setData] = useState([]);
+    
+    // const dispatch = useDispatch()
+    // const productData = useSelector(state => {
+    //     return state.products.productList
+    // })
+    useEffect(() => {
+        setFetching(true);
+        fetch('https://hero-pregbackend.herokuapp.com/healthtips/')//signal from abort
+            .then((response) => Data = response.json())
+            .then((Data) => {
+                setData(Data);//we want to first check if not unmounted to set the
+            })
+            .catch((error) => console.error(error))
+            .finally(() => setFetching(false));
+    },[])
+    return (
+        <FlatList 
+            data={healthData}
+            keyExtractor={({ id }, index) => id.toString()}
+            renderItem={({ item }) => (
+                <Tip 
+                    title={item.name}
+                    img={item.img}
+                    description={item.description}
+                    posted={item.posted}
+                />
+            )}
+        />
+    )
+}
+
+export default Healthtips;

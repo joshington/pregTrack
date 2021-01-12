@@ -12,6 +12,8 @@ import {getProductList, GET_PRODUCTS_LIST} from '../actions/products';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector,useDispatch} from 'react-redux';
 
+import Axios from 'axios';
+
 const  MamaKitShop = () =>  {
     const [isFetching, setFetching] = useState(true);
     const [data, setData] = useState([]);
@@ -24,18 +26,29 @@ const  MamaKitShop = () =>  {
         return state.products.productList
     })
     useEffect(() => {
-        let mounted = true;
+        let isMount = true;
         setFetching(true);
-        fetch('https://hero-pregbackend.herokuapp.com/shop/')
-        .then((response) => products = response.json())
-        .then((products) => {
-            if(mounted){
-                setData(products)
-            }
-        })
-        .catch((error) => console.error(error))
-        .finally(() => setFetching(false));
-        return () => mounted = false;
+
+        const loadData = () => {
+            fetch('https://hero-pregbackend.herokuapp.com/shop/', )//signal from abort
+            .then((response) =>  response.json())
+            .then((products) => {
+                console.log(products)
+                if(isMount){
+                    setFetching(false);
+                    setData(products);//we want to first check if not unmounted to set the
+                }
+            })
+            // .catch((error) => console.error(error))
+            // .finally(() => {if(!isMount) setFetching(false)});
+        }
+        loadData();
+        //cleanup
+        return () => {
+            console.log('unmounting')
+            isMount = false
+        }; //return cleanup function to abort.
+     
     }, []);
 
         return (
@@ -51,7 +64,7 @@ const  MamaKitShop = () =>  {
                                             <MamaCard 
                                                 name={item.title}
                                                 customIcon={
-                                                    <Image resizeMode="contain" style={{width:100,height:80,margin:15}} 
+                                                    <Image resizeMode="contain" style={{width:100,height:100,margin:15,marginBottom:20}} 
                                                         source={{uri:item.img}} 
                                                     />
                                                 }       
@@ -60,7 +73,7 @@ const  MamaKitShop = () =>  {
                                                     navigation.navigate("ProductDetails",{
                                                         itemId:item.id,
                                                         itemTitle:item.title,
-                                                        itemImg:item.img.url,
+                                                        itemImg:item.img,
                                                         itemPrice:item.price,
                                                         itemDescription:item.description,
                                                         itemQuantity:item.quantity
@@ -70,6 +83,7 @@ const  MamaKitShop = () =>  {
                                             />
                                         )}
                                         contentContainerStyle={{flexDirection:"row",flexWrap:"wrap"}}
+                                        numColumns={2}
                                     />
                                 // </View>
                         )}
@@ -77,12 +91,4 @@ const  MamaKitShop = () =>  {
             </>
         )
 }
-
-// const mapStateToProps = (state) => {
-//     const items = state.products.productList || {}
-//     return {
-//         items,
-//         isFetching:state.products.isFetching,
-//     }
-// }
 export default MamaKitShop;

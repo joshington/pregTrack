@@ -6,14 +6,14 @@ import styles from "./styles";
 
 const MamaCard = ({onPress, customIcon=null, name,price}) => {
     return(
-        <View style={{marginVertical:20}}>
+        <View>
             <TouchableOpacity onPress={onPress} style={{...styles.touchable,backgroundColor:"#ffffff",
-                width:130,height:120,borderRadius:10,marginTop:10,marginBottom:25,marginHorizontal:10,
+                width:130,height:150,borderRadius:10,marginTop:20,marginBottom:60,marginHorizontal:15
             }}>
                 <View style={{alignItems:'center'}}>
                     {customIcon}
-                    <Text style={{fontSize:15,marginLeft:5,marginVertical:4,alignItems:"center",fontWeight:"bold"}}>{name}</Text>
-                    <Text style={{fontSize:22,marginLeft:5,marginBottom:20,alignItems:"center",fontWeight:"bold",color:"#6495ed"}}>UGX {price}</Text>
+                    <Text style={{fontSize:15,marginVertical:10,marginTop:12,textAlign:"center",fontWeight:"bold"}}>{name}</Text>
+                    <Text style={{fontSize:22,marginBottom:20,textAlign:"center",fontWeight:"bold",color:"#6495ed"}}>UGX {price}</Text>
                 </View>
             </TouchableOpacity>
             {/* <View style={{width:1,height:160,backgroundColor:"#000",marginHorizontal:5}} /> */}

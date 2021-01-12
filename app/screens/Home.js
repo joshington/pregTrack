@@ -55,11 +55,11 @@ const  Home = ({navigation}) => {
                                 onPress={() => navigation.navigate('Book Nurse')}
                             />
                             <Card 
-                                text="Talk to Doctor"
+                                text="Health Blog"
                                 customIcon={
-                                    <Fontisto name="doctor" size={70} color="black" />
+                                    <FontAwesome name="newspaper-o" size={70} color="black" />
                                 } 
-                                onPress={() => console.log('replace with health tips')}
+                                onPress={() => navigation.navigate('Healthtips')}
                             />
                             <Card 
                                 text="Mama kits"
