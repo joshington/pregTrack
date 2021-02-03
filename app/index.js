@@ -12,12 +12,13 @@ import ProductDetail from './screens/ProductDetails';
 import UltraScan from './screens/UltraScan';
 import ContactDoctor from './screens/ContactDoctor';
 import Register from './screens/Register';
-import TopUpAmount from './screens/TopUpAmount';
+// import TopUpAmount from './screens/TopUpAmount';
 // import { DarkTheme } from "react-native-paper";
-import TopForAnother from './screens/TopForAnother';
+// import TopForAnother from './screens/TopForAnother';
 import CautionPin from './screens/CautionPin';
 // import OtpFill from './screens/OTPFill';
 import  OtpVerification from './screens/OtpVerification';
+import Orders from './screens/Orders';
 // import TestApi from './screens/TestApi';
 
 
@@ -32,5 +33,6 @@ export default () => (
     <Provider store={store}>
         <Navigator />
         {/* <TestApi /> */}
+        {/* <Orders /> */}
     </Provider>
 )

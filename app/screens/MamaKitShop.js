@@ -30,7 +30,7 @@ const  MamaKitShop = () =>  {
         setFetching(true);
 
         const loadData = () => {
-            fetch('https://hero-pregbackend.herokuapp.com/shop/', )//signal from abort
+            fetch('https://pregcareback.herokuapp.com/shop/', )//signal from abort
             .then((response) =>  response.json())
             .then((products) => {
                 console.log(products)
@@ -50,7 +50,7 @@ const  MamaKitShop = () =>  {
         }; //return cleanup function to abort.
      
     }, []);
-
+//+16193675651
         return (
             <>
                 <StatusBar translucent={false} barStyle="light-content"/> 

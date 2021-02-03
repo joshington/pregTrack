@@ -13,6 +13,7 @@ import CardContainer from '../components/ListCard/CardContainer';
 import HealthButton from '../components/Buttons/HealthButton'
 import {connect} from 'react-redux';
 import {useSelector} from 'react-redux';
+import BigDiv from '../components/Bigdiv/Bigdiv'
 
 
 const  Home = ({navigation}) => {
@@ -23,43 +24,15 @@ const  Home = ({navigation}) => {
             <Container>
                 <StatusBar translucent={false} barStyle="light-content"/>
                 <Header  lengthItems={cartItems} />
-                <ScrollView>
-                    <View style={{backgroundColor:"#B0E0E6",flex:1}}>
-                        {/* <Heading text="Reproductive Health shop" />
-                        <Bigdiv>
-                            <View style={{flexDirection:"row"}}>
-                                <Image resizeMode="contain" source={require("../../assets/mariecondoms.png")} 
-                                    style={{height:150,width:180}}
-                                />
-                                <View>
-                                    <Text style={{fontSize:22}}>Order with Us..</Text>
-                                    <View>
-                                        <Text style={{fontSize:15,color:"#FF0000",fontWeight:"bold"}}>Contraceptives</Text>
-                                        <Text style={{fontSize:15,color:"#FF0000",fontWeight:"bold"}}>Family Plannings</Text>
-                                        <Text style={{fontSize:15,color:"#FF0000",fontWeight:"bold"}}>Emergency pills</Text>
-                                    </View>
-                                    <View style={{marginVertical:5,marginRight:15}}>
-                                        <HealthButton onPress={this.shopNow} />
-                                    </View>
-                                </View>
-                            </View>
-                        </Bigdiv> */}
-                        {/* <Wallet /> */}
+                <ScrollView style={{backgroundColor:"#B0E0E6",flex:1,display:"flex"}}>
                         <Heading text="What do you Need?" />
-                        <View style={{display:'flex',flexDirection:'row',flexWrap:"wrap",flex:1,margin:8}}>
+                        <View style={{display:'flex',flexDirection:'row',flexWrap:"wrap",flex:1}}>
                             <Card 
                                 text="Book Nurse"
                                 customIcon={
                                     <MaterialCommunityIcons name="mother-nurse" size={70} color="black" />
                                 } 
                                 onPress={() => navigation.navigate('Book Nurse')}
-                            />
-                            <Card 
-                                text="Health Blog"
-                                customIcon={
-                                    <FontAwesome name="newspaper-o" size={70} color="black" />
-                                } 
-                                onPress={() => navigation.navigate('Healthtips')}
                             />
                             <Card 
                                 text="Mama kits"
@@ -83,25 +56,37 @@ const  Home = ({navigation}) => {
                                     />
                                 } 
                                 onPress={() => navigation.navigate('Utra Scan')}
-                            
-                            />
-                            {/* <Card 
-                                text="Parents Forum"
-                                customIcon={
-                                    <Octicons name="comment-discussion" size={70} color="black" />
-                                } 
-                            
                             />
                             <Card 
                                 text="Health Blog"
                                 customIcon={
                                     <FontAwesome name="newspaper-o" size={70} color="black" />
                                 } 
-                            
-                            /> */}
+                                onPress={() => navigation.navigate('Healthtips')}
+                            />  
                         </View>
-                    </View>
-
+                        <BigDiv>
+                            <View>
+                                <Text style={{fontSize:22,color:'#00008B',fontWeight:"bold",marginLeft:20,marginTop:10}}>PregCare</Text>
+                                <Text style={{fontSize:22,color:'#000',fontWeight:"bold",textAlign:"center",marginVertical:10}}>Your Health is our concern</Text>    
+                                <View  style={{height:StyleSheet.hairlineWidth,width:300,backgroundColor:"#000"}} />
+                                <View style={{flexDirection:"row"}}>
+                                    <Image resizeMode="contain" style={{width:120,height:120}}
+                                        source={require("../../assets/mamakit.png")} 
+                                    />
+                                    <View>
+                                        <Text style={{fontSize:20,color:"#00008B",fontWeight:"bold"}}>Cheap</Text>
+                                        <Text style={{fontSize:20,color:"#00008B",fontWeight:"bold"}}>Portable and</Text>
+                                        <Text style={{fontSize:20,color:"#00008B",fontWeight:"bold"}}>Well Packaged</Text>                                        
+                                        <TouchableOpacity style={{backgroundColor:"blue",height:35,
+                                            borderRadius:15,width:120,marginTop:10
+                                        }}>
+                                            <Text style={{fontSize:20,textAlign:"center"}}>See More</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                            </View>
+                        </BigDiv>
                 </ScrollView>
             </Container>
         )

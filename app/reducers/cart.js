@@ -22,21 +22,31 @@ function cartReducer(state=initialState,action){
                     image:action.payload.itemImg,
                     price:action.payload.itemPrice,
                     amount:action.payload.itemPrice*action.payload.quantity,
-
-                   
                     // itemTitle,
                     // itemImg,
                     // itemPrice,
                     // itemDescription,
                     // quantity,
+                   
                 }
                 state.Cart.push(cart);
+                return {
+                    ...state,
+                    itemsCount:state.itemsCount+1,
+                    totalAmount:state.Cart.map(item  => {
+                        state.totalAmount+item.amount
+                    })
+                }
             }else{
                 let exists = false;
                 state.Cart.map((item,key) => {
                     if(item.id === action.payload.id){
                         state.Cart[key].quantity++;
                         exists = true;
+                    }
+                    return {
+                        ...state,
+                        itemsCount:state.itemsCount,
                     }
                 })
                 if(!exists){
@@ -49,16 +59,15 @@ function cartReducer(state=initialState,action){
                         amount:action.payload.itemPrice*action.payload.quantity,
                     }
                     state.Cart.push(_cart)
+                    return {
+                        ...state,
+                        itemsCount:state.itemsCount+1,
+                        totalAmount:state.Cart.map(item  => {
+                            state.totalAmount+item.amount
+                        })
+                    }
                 }
             }
-            return {
-                ...state,
-                itemsCount:state.itemsCount+1,
-                totalAmount:state.Cart.map(item  => {
-                    state.totalAmount+item.amount
-                })
-            }
-
         case ADD_QUANTITY:
             return {
                 ...state,

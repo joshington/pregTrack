@@ -32,7 +32,7 @@ import TopUpAmount from '../screens/TopUpAmount';
 import TopUpFlutter from '../screens/TopUpflutter';
 import {useSelector} from 'react-redux';
 import CartScreen from '../screens/CartScreen';
-// import Healthtips from '../screens/Healthtips';
+import Healthtips from '../screens/Healthtips';
 
 
 const Stack = createStackNavigator()
@@ -41,10 +41,32 @@ const Tabs  = createBottomTabNavigator()
 
 const RootHome = () => {
     return (
-    <Tabs.Navigator>
+    <Tabs.Navigator
+        screenOptions={({route}) => ({
+            tabBarIcon:({color}) => {
+                let iconName;
+                if(route.name === 'PregCare'){
+                    iconName = "home";
+                }else if (route.name === 'My Cart'){
+                    iconName = "shopping-basket"
+                }else if(route.name === 'My Account'){
+                    iconName = "account";
+                }
+                return (
+                        <FontAwesome name={iconName} size={32} color="black" /> || 
+                        // <FontAwesome name={iconName} size={35} color="black" /> || 
+                        <MaterialCommunityIcons name={iconName} size={32} color="black" />
+                    )
+            },
+        })}
+        tabBarOptions={{
+            activeTintColor:"#20B2AA",
+            inactiveTintColor: 'black',
+        }}
+    >
         <Tabs.Screen name="PregCare" component={HomeScreenStack} />
         <Tabs.Screen  name="MyAccount" component={MyAccountStack} />
-        <Tabs.Screen name="Orders" component={Orders} />
+        <Tabs.Screen name="My Cart" component={CartScreen} />
     </Tabs.Navigator>
 
     )
@@ -99,7 +121,7 @@ const MamaKitStack = ({navigation}) => {
                 name="ProductDetails" 
                 component={ProductDetails} 
                 options={{headerRight:() => (
-                    <TouchableOpacity style={{marginRight:15}}
+                    <TouchableOpacity style={{marginRight:40,marginTop:20}}
                         onPress={() => {navigation.navigate('CartScreen')}}
                     >
                         <View>
@@ -126,7 +148,7 @@ function HomeScreenStack(){
             <Stack.Screen name="MamaKitshop" component={MamaKitStack} />
             <Stack.Screen name="Book Nurse" component={BookNurse} />
             <Stack.Screen name="Utra Scan" component={UltraScan} />
-            {/* <Stack.Screen name="Healthtips" component={Healthtips} /> */}
+            <Stack.Screen name="Healthtips" component={Healthtips} />
         </Stack.Navigator>
     )
 }
@@ -138,7 +160,8 @@ const Navigator = () => {
                 <Stack.Screen name="rootHome" component={RootHome} />
                 <Stack.Screen  name="Home" component={HomeScreenStack} />
                 <Stack.Screen  name="Mamakits" component={MamaKitStack} />
-                <Stack.Screen  name="CartScreen" component={CartScreen} />
+                <Stack.Screen  name="My Cart" component={CartScreen} />
+                <Stack.Screen  name="Order Summary" component={Orders} />
                 <Stack.Screen  name="My Account" component={MyAccountStack} />
             </Stack.Navigator>
         </NavigationContainer>

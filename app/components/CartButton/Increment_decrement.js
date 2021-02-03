@@ -11,16 +11,16 @@ const Increment = ({quantity,increment,decrement}) => {
             <View style={{flexDirection:"row",marginLeft:10,borderWidth:1,borderStyle:"solid",
                 borderColor:"#6495ed"
             }}>
-                <TouchableHighlight style={{backgroundColor:"#6495ed",height:50,width:35}}
+                <TouchableHighlight style={{backgroundColor:"#6495ed",height:20,width:20}}
                     onPress={decrement}
                 >
-                    <Text style={{color:"#ffffff",fontSize:25,textAlign:"center"}}>-</Text>
+                    <Text style={{color:"#ffffff",fontSize:20,textAlign:"center",fontWeight:"bold"}}>-</Text>
                 </TouchableHighlight>
                 <Text style={{color:"#000000",fontSize:25,textAlign:"center",marginHorizontal:5}}>{quantity}</Text>
-                <TouchableHighlight style={{backgroundColor:"#6495ed",height:50,width:40}}
+                <TouchableHighlight style={{backgroundColor:"#6495ed",height:20,width:20}}
                     onPress={increment}
                 >
-                    <Text style={{color:"#ffffff",fontSize:25,textAlign:"center"}}>+</Text>
+                    <Text style={{color:"#ffffff",fontSize:20,textAlign:"center",fontWeight:"bold"}}>+</Text>
                 </TouchableHighlight>
             </View>
         </View>
